@@ -1,4 +1,16 @@
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+
 export default function WeatherCard({ info, airInfo }) {
+
+    // let rating = 0;
+
+    let clouds = info.clouds;
+    let aqi = airInfo.main.aqi;
+    let humidity = info.humidity;
+    let wind_speed = info.wind_speed;
 
     var sunset = new Date(info.sunset * 1000);
     let sunset_hours = sunset.getHours() - 12;
@@ -20,17 +32,21 @@ export default function WeatherCard({ info, airInfo }) {
     }
 
     return (
-        <div>
+        <Card sx={{ minWidth: 275 }}>
 
-        <h4 className="weather-card">{day}</h4>
-        <h5>Sunset: {sunset_hours}:{sunset_minutes.substr(-2)} PM</h5>
-        <h5>Clouds: {info.clouds}%</h5>
-        <h5>AQI: {airInfo.main.aqi}</h5>
-        <h5>Humidity: {info.humidity}%</h5>
-        <h5>Wind Speed: {info.wind_speed} mph</h5>
-        <h5>Wind Direction: {wind_direction}</h5>
+        <CardContent>
 
-        </div>
+        <Typography sx={{ fontSize: 14}}>{day}</Typography>
+        <Typography>Sunset: {sunset_hours}:{sunset_minutes.substr(-2)} PM</Typography>
+        <Typography>Clouds: {clouds}%</Typography>
+        <Typography>AQI: {aqi}</Typography>
+        <Typography>Humidity: {humidity}%</Typography>
+        <Typography>Wind Speed: {wind_speed} mph</Typography>
+        <Typography>Wind Direction: {wind_direction}</Typography>
+
+        </CardContent>
+
+        </Card>
     )
 
 }
