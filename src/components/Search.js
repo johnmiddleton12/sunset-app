@@ -1,16 +1,7 @@
-import { React, useState } from "react";
-
-function Search() {
-
-    const [inputText, setInputText] = useState("");
+function Search({ setZipCode, getCoords }) {
 
     let inputChangeHandler = (e) => {
-        setInputText(e.target.value);
-    }
-
-    let inputHandler = () => {
-        var input = inputText;
-        console.log(input);
+        setZipCode(e.target.value);
     }
 
     return (
@@ -22,7 +13,7 @@ function Search() {
                 type="text"
             />
             <button
-                onClick={inputHandler}
+                onClick={getCoords}
             >
                 Submit
             </button>
