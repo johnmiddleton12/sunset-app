@@ -14,8 +14,6 @@ The Open Weather Map [One Call API](https://openweathermap.org/api/one-call-3) a
 
 ### Todo
 
-[] Use a CSS Framework to stylize
-
-[] Make a formula to standardize a sunset rating, e.g., 0 - 100
-
-[] Make a database to store data and location ranges that were accessed to reduce API calls
+- [ ] Use a CSS Framework to stylize
+- [ ] Make a formula to standardize a sunset rating, e.g., 0 - 100
+- [ ] Make a database to store data and location ranges that were accessed to reduce API calls
