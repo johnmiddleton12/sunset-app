@@ -40,14 +40,24 @@ function App() {
         <div className="App">
             <header className="App-header">
                 <h2>Enter a location</h2>
-                <Search location={location}
-                        setLocation={setLocation}
-                        setLat={setLat}
-                        setLng={setLng}
-                        setFormattedLoc={setFormattedLoc}
+                <Search
+                    location={location}
+                    setLocation={setLocation}
+                    setLat={setLat}
+                    setLng={setLng}
+                    setFormattedLoc={setFormattedLoc}
                 />
+                <h3>Help</h3>
+                <p>AQI is air quality index, 1-5 - 1 is best.<br />
+                Clouds is a percentage, 30%-70% is best.<br />
+                Humidity is a percentage, lower percentages are best.<br />
+                Calm winds are usually best, but wind direction changes near sunset times are good.
+                </p>
+
                 <Weather lat={lat} lng={lng} />
-                {formattedLoc !== "" && <h3>Currently Viewing: {formattedLoc}</h3>}
+                {formattedLoc !== "" && (
+                    <h3>Currently Viewing: {formattedLoc}</h3>
+                )}
             </header>
         </div>
     );

@@ -44,3 +44,7 @@ p {
 .weatherGroup {
   display: flex;
 }
+
+.weather-card {
+  margin: 5px;
+}

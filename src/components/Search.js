@@ -16,7 +16,7 @@ function Search({ location, setLocation, setLat, setLng, setFormattedLoc }) {
         // Geocode.fromAddress(zipCode + ",US").then(
         Geocode.fromAddress(location || "US").then(
             (response) => {
-                console.log('coordinating')
+                // console.log('coordinating')
                 const { lat, lng } = response.results[0].geometry.location;
                 setFormattedLoc(response.results[0].formatted_address);
                 setLat(lat);
