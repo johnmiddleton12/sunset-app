@@ -1,7 +1,7 @@
-function Search({ setZipCode, getCoords }) {
+function Search({ setLocation, getCoords }) {
 
     let inputChangeHandler = (e) => {
-        setZipCode(e.target.value);
+        setLocation(e.target.value);
     }
 
     return (

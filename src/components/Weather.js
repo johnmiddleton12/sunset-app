@@ -1,19 +1,9 @@
-import React, { useEffect } from "react";
+function Weather({ lat, lng }) {
 
-function Weather({ coords, lat, lng }) {
-
-    useEffect(() => {
-        if (
-            coords.current.lat !== lat &&
-            coords.current.lng !== lng
-        ) {
-            console.log(lat, lng);
-            coords.current = {lat, lng};
-        }
-    })
-
+    if (lat !== 0 && lng !== 0) {
     return (
         <div id="weather">
+
             <h3>
                 Latitude: {lat}
             </h3>
@@ -22,6 +12,14 @@ function Weather({ coords, lat, lng }) {
             </h3>
         </div>
     )
+    }
+    else{
+        return(
+            <div id="weather">
+                
+            </div>
+        )
+    }
 
 }
 
