@@ -1,4 +1,4 @@
-# Sunset Helper
+# Sunset Predictor 
 
 This project shows the forecast for the week, predicting how good the sunsets will be based on weather factors.
 
