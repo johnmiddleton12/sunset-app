@@ -65,7 +65,10 @@ export default function WeatherCard({ info, airInfo, today }) {
 
     return (
         <Grid item>
-            <Card sx={{ minWidth: 275 }}>
+            <Card 
+                sx={{ minWidth: 275 }}
+                variant={today ? "outlined" : "elevation"}
+            >
                 <CardMedia
                     component="img"
                     height="140"
