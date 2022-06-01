@@ -2,7 +2,9 @@ import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { Grid } from "@mui/material";
+import { CardMedia, Grid } from "@mui/material";
+
+const sunsetImg = require("../sunset.jpg");
 
 export default function WeatherCard({ info, airInfo, today }) {
     // let rating = 0;
@@ -11,6 +13,18 @@ export default function WeatherCard({ info, airInfo, today }) {
     let aqi = airInfo.main.aqi;
     let humidity = info.humidity;
     let wind_speed = info.wind_speed;
+
+    let cloud_rating =
+        100 - Math.min(Math.abs(30 - clouds), Math.abs(70 - clouds));
+    let aqi_rating = aqi * 20;
+    let humidity_rating = 100 - humidity;
+    let wind_speed_rating = 100 - wind_speed / 10;
+    let rating =
+        cloud_rating * 0.5 +
+        aqi_rating * 0.2 +
+        humidity_rating * 0.2 +
+        wind_speed_rating * 0.1;
+    rating = Math.round(rating * 100) / 100;
 
     var sunset = new Date(info.sunset * 1000);
     let sunset_hours = sunset.getHours() - 12;
@@ -52,11 +66,21 @@ export default function WeatherCard({ info, airInfo, today }) {
     return (
         <Grid item>
             <Card sx={{ minWidth: 275 }}>
+                <CardMedia
+                    component="img"
+                    height="140"
+                    image={String(sunsetImg)}
+                    alt="sunset"
+                    sx={{
+                        filter: `brightness(${rating}%)`,
+                    }}
+                />
                 <CardContent>
                     <Typography sx={{ fontSize: 14 }}>{day}</Typography>
                     <Typography>
                         Sunset: {sunset_hours}:{sunset_minutes.substr(-2)} PM
                     </Typography>
+                    <Typography>Rating: {rating}%</Typography>
                     <Typography>Clouds: {clouds}%</Typography>
                     <Typography>AQI: {aqi}</Typography>
                     <Typography>Humidity: {humidity}%</Typography>
