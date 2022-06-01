@@ -37,6 +37,7 @@ export default function WeatherCard({ info, airInfo, today }) {
         "Friday",
         "Saturday",
     ];
+    sunset = new Date(info.sunset * 1000);
     let day = weekday[sunset.getDay()];
     day = today ? day + " (Today)" : day;
 
