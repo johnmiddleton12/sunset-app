@@ -1,12 +1,12 @@
 import Search from "./components/Search";
 import Weather from "./components/Weather";
-import Help from './components/Help';
-import Heading from './components/Heading';
+import Help from "./components/Help";
+import Heading from "./components/Heading";
 import React, { useState, useEffect } from "react";
 import "./App.css";
 
 import Geocode from "react-geocode";
-import { Box, Container } from "@mui/system";
+import { Container } from "@mui/system";
 
 function App() {
     Geocode.setApiKey(process.env.REACT_APP_MAPS_API_KEY);
@@ -16,7 +16,6 @@ function App() {
     // const [lng, setLng] = useState(118.4912);
     const [lat, setLat] = useState(0);
     const [lng, setLng] = useState(0);
-    const [location, setLocation] = useState("");
     const [formattedLoc, setFormattedLoc] = useState("");
     const [loaded, setLoaded] = useState(false);
 
@@ -46,12 +45,9 @@ function App() {
 
     return (
         <Container className="App-header">
-
             <Heading />
 
             <Search
-                location={location}
-                setLocation={setLocation}
                 setLat={setLat}
                 setLng={setLng}
                 setFormattedLoc={setFormattedLoc}

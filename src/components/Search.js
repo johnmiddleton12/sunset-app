@@ -2,7 +2,11 @@ import { TextField, Grid } from "@mui/material";
 import LoadingButton from '@mui/lab/LoadingButton';
 import Geocode from "react-geocode";
 
-function Search({ location, currentLocation, setLocation, setLat, setLng, setFormattedLoc, loaded }) {
+import React, { useState } from "react";
+
+function Search({ currentLocation, setLat, setLng, setFormattedLoc, loaded }) {
+
+    const [location, setLocation] = useState("");
 
     const inputChangeHandler = (e) => {
         setLocation(e.target.value);
