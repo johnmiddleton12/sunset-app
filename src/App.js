@@ -23,29 +23,29 @@ function App() {
 
     let theme = createTheme({
         palette: {
-          mode: 'dark',
+            mode: "dark",
         },
     });
 
     theme = createTheme(theme, {
-      typography: {
-        h2: {
-          color: theme.palette.text.primary,
-          fontSize: "2.5em",
-          paddingTop: "25px"
+        typography: {
+            h2: {
+                color: theme.palette.text.primary,
+                fontSize: "2.5em",
+                paddingTop: "25px",
+            },
+            h4: {
+                color: theme.palette.text.primary,
+                fontSize: "1.5em",
+                paddingTop: "25px",
+            },
+            p: {
+                color: theme.palette.text.primary,
+                fontSize: "1em",
+                paddingTop: "25px",
+            },
         },
-        h4: {
-          color: theme.palette.text.primary,
-          fontSize: "1.5em",
-          paddingTop: "25px"
-        },
-        p: {
-          color: theme.palette.text.primary,
-          fontSize: "1em",
-          paddingTop: "25px"
-        }
-      }
-    })
+    });
 
     const currentLocation = () => {
         if (navigator.geolocation) {
@@ -72,28 +72,31 @@ function App() {
     }, []);
 
     return (
-      <ThemeProvider theme={theme}>
-        <Container className="App-header" sx={{
-          // backgroundColor: theme.palette.background.paper
-          backgroundColor: "#a40606",
-          backgroundImage: "linear-gradient(315deg, #a40606 0%, #d98324 74%)"
+        <ThemeProvider theme={theme}>
+            <Container
+                className="App-header"
+                sx={{
+                    // backgroundColor: theme.palette.background.paper
+                    backgroundColor: "#a40606",
+                    backgroundImage:
+                        "linear-gradient(315deg, #a40606 0%, #d98324 74%)",
+                }}
+            >
+                <Heading />
 
-        }}>
-            <Heading />
+                <Search
+                    setLat={setLat}
+                    setLng={setLng}
+                    setFormattedLoc={setFormattedLoc}
+                    currentLocation={currentLocation}
+                    loaded={loaded}
+                />
 
-            <Search
-                setLat={setLat}
-                setLng={setLng}
-                setFormattedLoc={setFormattedLoc}
-                currentLocation={currentLocation}
-                loaded={loaded}
-            />
+                <Help formattedLoc={formattedLoc} />
 
-            <Help formattedLoc={formattedLoc} />
-
-            <Weather lat={lat} lng={lng} setLoaded={setLoaded} />
-        </Container>
-      </ThemeProvider>
+                <Weather lat={lat} lng={lng} setLoaded={setLoaded} />
+            </Container>
+        </ThemeProvider>
     );
 }
 
