@@ -17,3 +17,4 @@ The Open Weather Map [One Call API](https://openweathermap.org/api/one-call-3) a
 - [ ] Tweak formula that rates sunsets, currently super harsh
 - [ ] Stylize further, sunset animation or something
 - [ ] Make a database to store data and location ranges that were accessed to reduce API calls
+- [ ] Fix narrow width of search area mobile
