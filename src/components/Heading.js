@@ -1,4 +1,5 @@
 import { Box } from "@mui/system";
+import Typography from "@mui/material/Typography";
 
 export default function Heading () {
     return (
@@ -8,7 +9,7 @@ export default function Heading () {
                 alignItems="center"
                 textAlign="center"
             >
-                <h1>Enter a location</h1>
+                <Typography variant="h2">Enter a location</Typography>
             </Box>
     )
 }

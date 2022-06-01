@@ -1,6 +1,7 @@
 import { Box, Container } from "@mui/system";
+import Typography from "@mui/material/Typography";
 
-export default function Help ({ formattedLoc }) {
+export default function Help({ formattedLoc }) {
     return (
         <Container>
             <Box
@@ -10,7 +11,9 @@ export default function Help ({ formattedLoc }) {
                 textAlign="center"
             >
                 {formattedLoc !== "" && (
-                    <h4>Currently Viewing: {formattedLoc}</h4>
+                    <Typography variant="h4">
+                        Currently Viewing: {formattedLoc}
+                    </Typography>
                 )}
             </Box>
             <Box
@@ -19,7 +22,7 @@ export default function Help ({ formattedLoc }) {
                 alignItems="center"
                 textAlign="center"
             >
-                <p>
+                <Typography variant="p">
                     AQI is air quality index, 1-5 - 1 is best.
                     <br />
                     Clouds is a percentage, 30%-70% is best.
@@ -28,8 +31,8 @@ export default function Help ({ formattedLoc }) {
                     <br />
                     Calm winds are usually best, but wind direction changes near
                     sunset times are good.
-                </p>
+                </Typography>
             </Box>
         </Container>
-    )
+    );
 }

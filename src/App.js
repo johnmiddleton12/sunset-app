@@ -8,6 +8,8 @@ import "./App.css";
 import Geocode from "react-geocode";
 import { Container } from "@mui/system";
 
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+
 function App() {
     Geocode.setApiKey(process.env.REACT_APP_MAPS_API_KEY);
     // Geocode.setRegion("us");
@@ -18,6 +20,32 @@ function App() {
     const [lng, setLng] = useState(0);
     const [formattedLoc, setFormattedLoc] = useState("");
     const [loaded, setLoaded] = useState(false);
+
+    let theme = createTheme({
+        palette: {
+          mode: 'dark',
+        },
+    });
+
+    theme = createTheme(theme, {
+      typography: {
+        h2: {
+          color: theme.palette.text.primary,
+          fontSize: "2.5em",
+          paddingTop: "25px"
+        },
+        h4: {
+          color: theme.palette.text.primary,
+          fontSize: "1.5em",
+          paddingTop: "25px"
+        },
+        p: {
+          color: theme.palette.text.primary,
+          fontSize: "1em",
+          paddingTop: "25px"
+        }
+      }
+    })
 
     const currentLocation = () => {
         if (navigator.geolocation) {
@@ -44,7 +72,10 @@ function App() {
     }, []);
 
     return (
-        <Container className="App-header">
+      <ThemeProvider theme={theme}>
+        <Container className="App-header" sx={{
+          backgroundColor: theme.palette.background.paper
+        }}>
             <Heading />
 
             <Search
@@ -59,6 +90,7 @@ function App() {
 
             <Weather lat={lat} lng={lng} setLoaded={setLoaded} />
         </Container>
+      </ThemeProvider>
     );
 }
 

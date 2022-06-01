@@ -45,6 +45,7 @@ function Search({ currentLocation, setLat, setLng, setFormattedLoc, loaded }) {
         direction="column"
         alignItems="center"
         justifyContent="center"
+        paddingTop="25px"
         >
             <Grid item xs={8}>
             <TextField

@@ -1,6 +1,5 @@
 import { Grid } from "@mui/material";
 import React, { useState, useEffect, useRef } from "react";
-
 import WeatherCard from "./WeatherCard";
 
 function Weather({ lat, lng, setLoaded }) {
@@ -60,7 +59,7 @@ function Weather({ lat, lng, setLoaded }) {
         }
     }, [lat, lng, setLoaded]);
 
-    return <Grid container justifyContent="center" spacing={2}>{componentArray}</Grid>
+    return <Grid container justifyContent="center" spacing={2} paddingTop="25px">{componentArray}</Grid>
 
 }
 
