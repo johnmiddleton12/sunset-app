@@ -74,7 +74,10 @@ function App() {
     return (
       <ThemeProvider theme={theme}>
         <Container className="App-header" sx={{
-          backgroundColor: theme.palette.background.paper
+          // backgroundColor: theme.palette.background.paper
+          backgroundColor: "#a40606",
+          backgroundImage: "linear-gradient(315deg, #a40606 0%, #d98324 74%)"
+
         }}>
             <Heading />
 
