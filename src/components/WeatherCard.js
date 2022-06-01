@@ -2,8 +2,9 @@ import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import { Grid } from '@mui/material';
 
-export default function WeatherCard({ info, airInfo }) {
+export default function WeatherCard({ info, airInfo, today }) {
 
     // let rating = 0;
 
@@ -18,6 +19,7 @@ export default function WeatherCard({ info, airInfo }) {
 
     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     let day = weekday[sunset.getDay()];
+    day = today ? day + " (Today)" : day;
 
     let angle = parseInt(info.wind_deg);
     const arrows = { north: '↑ N', north_east: '↗ NE', east: '→ E', south_east: '↘ SE', south: '↓ S', south_west: '↙ SW', west: '← W', north_west: '↖ NW' };
@@ -32,6 +34,7 @@ export default function WeatherCard({ info, airInfo }) {
     }
 
     return (
+        <Grid item>
         <Card sx={{ minWidth: 275 }}>
 
         <CardContent>
@@ -47,6 +50,7 @@ export default function WeatherCard({ info, airInfo }) {
         </CardContent>
 
         </Card>
+        </Grid>
     )
 
 }

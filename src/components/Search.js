@@ -1,6 +1,8 @@
+import { TextField, Grid } from "@mui/material";
+import LoadingButton from '@mui/lab/LoadingButton';
 import Geocode from "react-geocode";
 
-function Search({ location, setLocation, setLat, setLng, setFormattedLoc }) {
+function Search({ location, currentLocation, setLocation, setLat, setLng, setFormattedLoc, loaded }) {
 
     const inputChangeHandler = (e) => {
         setLocation(e.target.value);
@@ -23,26 +25,39 @@ function Search({ location, setLocation, setLat, setLng, setFormattedLoc }) {
                 setLng(lng);
             },
             (error) => {
-                console.error(error);
+                if (error.message.includes("ZERO_RESULTS")) {
+                    alert('Invalid Location!');
+                } else {
+                    console.error(error);
+                }
             }
         );
     };
 
     return (
-        <div id="search">
-            <input
-                id="main"
+        <Grid 
+        container
+        spacing={2}
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+        >
+            <Grid item xs={8}>
+            <TextField
+                id="outlined-basic"
                 onChange={inputChangeHandler}
                 onKeyPress={handleKeyPress}
-                label="Search"
-                type="text"
+                label="Location"
+                variant="outlined"
             />
-            <button
-                onClick={getCoords}
-            >
-                Submit
-            </button>
-        </div>
+            </Grid>
+            <Grid item xs={0}>
+            <LoadingButton onClick={getCoords} loading={!loaded} variant="outlined">Submit</LoadingButton>
+            </Grid>
+            <Grid item xs={12}>
+            <LoadingButton onClick={currentLocation} loading={!loaded} variant="outlined">Current Location</LoadingButton>
+            </Grid>
+        </Grid>
     )
 }
 

@@ -1,8 +1,9 @@
+import { Grid } from "@mui/material";
 import React, { useState, useEffect, useRef } from "react";
 
 import WeatherCard from "./WeatherCard";
 
-function Weather({ lat, lng }) {
+function Weather({ lat, lng, setLoaded }) {
     const coords = useRef({ lat, lng });
 
     const [componentArray, setComponentArray] = useState([]);
@@ -11,6 +12,8 @@ function Weather({ lat, lng }) {
         if (coords.current.lat !== lat && coords.current.lng !== lng) {
             // console.log(lat, lng);
             console.log("MAKING API CALLS");
+
+            setLoaded(false);
 
             const endpoint = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lng}&exclude={part}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=imperial`;
 
@@ -27,6 +30,8 @@ function Weather({ lat, lng }) {
 
                     Promise.all([response.json(), airResponse.json()]).then(
                         ([data, airData]) => {
+
+                            setLoaded(true);
                             // console.log(data);
                             let tempArr = [];
                             let daily = data.daily;
@@ -39,6 +44,7 @@ function Weather({ lat, lng }) {
                                         key={day.dt}
                                         info={day}
                                         airInfo={airDaily[i]}
+                                        today={i===0}
                                     />
                                 );
                             }
@@ -52,9 +58,10 @@ function Weather({ lat, lng }) {
 
             coords.current = { lat, lng };
         }
-    }, [lat, lng]);
+    }, [lat, lng, setLoaded]);
 
-    return <div className="weatherGroup">{componentArray}</div>;
+    return <Grid container justifyContent="center" spacing={2}>{componentArray}</Grid>
+
 }
 
 export default Weather;

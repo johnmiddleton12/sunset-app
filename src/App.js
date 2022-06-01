@@ -4,19 +4,22 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 
 import Geocode from "react-geocode";
+import { Box, Container } from "@mui/system";
 
 function App() {
     Geocode.setApiKey(process.env.REACT_APP_MAPS_API_KEY);
     // Geocode.setRegion("us");
 
-    // const [lat, setLat] = useState(33.7604);
-    // const [lng, setLng] = useState(-117.9676);
+    // const [lat, setLat] = useState(34.0195);
+    // const [lng, setLng] = useState(118.4912);
     const [lat, setLat] = useState(0);
     const [lng, setLng] = useState(0);
     const [location, setLocation] = useState("");
     const [formattedLoc, setFormattedLoc] = useState("");
 
-    useEffect(() => {
+    const [loaded, setLoaded] = useState(false);
+
+    const currentLocation = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((loc) => {
                 setLat(loc.coords.latitude);
@@ -34,32 +37,61 @@ function App() {
                 );
             });
         }
+    };
+
+    useEffect(() => {
+        currentLocation();
     }, []);
 
     return (
-        <div className="App">
-            <header className="App-header">
-                <h2>Enter a location</h2>
-                <Search
-                    location={location}
-                    setLocation={setLocation}
-                    setLat={setLat}
-                    setLng={setLng}
-                    setFormattedLoc={setFormattedLoc}
-                />
+        <Container className="App-header">
+            <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                textAlign="center"
+            >
+                <h1>Enter a location</h1>
+            </Box>
+            <Search
+                location={location}
+                setLocation={setLocation}
+                setLat={setLat}
+                setLng={setLng}
+                setFormattedLoc={setFormattedLoc}
+                currentLocation={currentLocation}
+                loaded={loaded}
+            />
+            <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                textAlign="center"
+            >
                 {formattedLoc !== "" && (
                     <h4>Currently Viewing: {formattedLoc}</h4>
                 )}
-                <h4>Help</h4>
-                <p>AQI is air quality index, 1-5 - 1 is best.<br />
-                Clouds is a percentage, 30%-70% is best.<br />
-                Humidity is a percentage, lower percentages are best.<br />
-                Calm winds are usually best, but wind direction changes near sunset times are good.
+            </Box>
+            <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                textAlign="center"
+            >
+                <p>
+                    AQI is air quality index, 1-5 - 1 is best.
+                    <br />
+                    Clouds is a percentage, 30%-70% is best.
+                    <br />
+                    Humidity is a percentage, lower percentages are best.
+                    <br />
+                    Calm winds are usually best, but wind direction changes near
+                    sunset times are good.
                 </p>
+            </Box>
 
-                <Weather lat={lat} lng={lng} />
-            </header>
-        </div>
+            <Weather lat={lat} lng={lng} setLoaded={setLoaded} />
+        </Container>
     );
 }
 
