@@ -47,7 +47,7 @@ function Search({ blockedLocation, currentLocation, setLat, setLng, setFormatted
         justifyContent="center"
         paddingTop="25px"
         >
-            <Grid item xs={8}>
+            <Grid item xs={12}>
             <TextField
                 id="outlined-basic"
                 onChange={inputChangeHandler}
@@ -56,7 +56,7 @@ function Search({ blockedLocation, currentLocation, setLat, setLng, setFormatted
                 variant="outlined"
             />
             </Grid>
-            <Grid item xs={0}>
+            <Grid item xs={12}>
             <LoadingButton onClick={getCoords} loading={!loaded} variant="outlined">Submit</LoadingButton>
             </Grid>
             <Grid item xs={12}>
