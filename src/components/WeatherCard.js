@@ -7,7 +7,6 @@ import { CardMedia, Grid } from "@mui/material";
 const sunsetImg = require("../sunset.jpg");
 
 export default function WeatherCard({ info, airInfo, today }) {
-    // let rating = 0;
 
     let clouds = info.clouds;
     let aqi = airInfo.main.aqi;
@@ -26,9 +25,8 @@ export default function WeatherCard({ info, airInfo, today }) {
         wind_speed_rating * 0.1;
     rating = Math.round(rating * 100) / 100;
 
-    var sunset = new Date(info.sunset * 1000);
-    let sunset_hours = sunset.getHours() - 12;
-    let sunset_minutes = "0" + sunset.getMinutes();
+    var sunset = new Date(info.sunset);
+    let sunset_time = sunset.toLocaleString('en-US').split(" ")[1].slice(0, -3);
 
     const weekday = [
         "Sunday",
@@ -81,7 +79,7 @@ export default function WeatherCard({ info, airInfo, today }) {
                 <CardContent>
                     <Typography sx={{ fontSize: 14 }}>{day}</Typography>
                     <Typography>
-                        Sunset: {sunset_hours}:{sunset_minutes.substr(-2)} PM
+                        Sunset: {sunset_time} PM
                     </Typography>
                     <Typography>Rating: {rating}%</Typography>
                     <Typography>Clouds: {clouds}%</Typography>

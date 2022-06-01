@@ -4,7 +4,7 @@ import Geocode from "react-geocode";
 
 import React, { useState } from "react";
 
-function Search({ currentLocation, setLat, setLng, setFormattedLoc, loaded }) {
+function Search({ blockedLocation, currentLocation, setLat, setLng, setFormattedLoc, loaded }) {
 
     const [location, setLocation] = useState("");
 
@@ -60,7 +60,7 @@ function Search({ currentLocation, setLat, setLng, setFormattedLoc, loaded }) {
             <LoadingButton onClick={getCoords} loading={!loaded} variant="outlined">Submit</LoadingButton>
             </Grid>
             <Grid item xs={12}>
-            <LoadingButton onClick={currentLocation} loading={!loaded} variant="outlined">Current Location</LoadingButton>
+            <LoadingButton disabled={blockedLocation} onClick={currentLocation} loading={!loaded} variant="outlined">Current Location</LoadingButton>
             </Grid>
         </Grid>
     )

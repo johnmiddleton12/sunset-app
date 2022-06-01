@@ -9,7 +9,6 @@ function Weather({ lat, lng, setLoaded }) {
 
     useEffect(() => {
         if (coords.current.lat !== lat && coords.current.lng !== lng) {
-            // console.log(lat, lng);
             console.log("MAKING API CALLS");
 
             setLoaded(false);

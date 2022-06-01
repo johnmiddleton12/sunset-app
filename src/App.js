@@ -14,12 +14,13 @@ function App() {
     Geocode.setApiKey(process.env.REACT_APP_MAPS_API_KEY);
     // Geocode.setRegion("us");
 
-    const [lat, setLat] = useState(34.0195);
-    const [lng, setLng] = useState(118.4912);
-    // const [lat, setLat] = useState(0);
-    // const [lng, setLng] = useState(0);
+    // const [lat, setLat] = useState(34.0195);
+    // const [lng, setLng] = useState(118.4912);
+    const [lat, setLat] = useState(0);
+    const [lng, setLng] = useState(0);
     const [formattedLoc, setFormattedLoc] = useState("");
     const [loaded, setLoaded] = useState(false);
+    const [blockedLocation, setBlockedLocation] = useState(false);
 
     let theme = createTheme({
         palette: {
@@ -49,23 +50,52 @@ function App() {
 
     const currentLocation = () => {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((loc) => {
-                setLat(loc.coords.latitude);
-                setLng(loc.coords.longitude);
-                Geocode.fromLatLng(
-                    loc.coords.latitude.toString(),
-                    loc.coords.longitude.toString()
-                ).then(
-                    (response) => {
-                        setFormattedLoc(response.results[0].formatted_address);
-                    },
-                    (error) => {
-                        console.error(error);
-                    }
-                );
-            });
+            navigator.geolocation.getCurrentPosition(
+                (loc) => {
+                    setBlockedLocation(false);
+                    setLat(loc.coords.latitude);
+                    setLng(loc.coords.longitude);
+                    Geocode.fromLatLng(
+                        loc.coords.latitude.toString(),
+                        loc.coords.longitude.toString()
+                    ).then(
+                        (response) => {
+                            setFormattedLoc(
+                                response.results[0].formatted_address
+                            );
+                        },
+                        (error) => {
+                            console.error(error);
+                        }
+                    );
+                },
+                () => {
+                    setBlockedLocation(true);
+                    setLat(34.4208305);
+                    setLng(-119.6981901);
+                    setFormattedLoc("Santa Monica, CA, USA");
+                }
+            );
+        } else {
+            setLat(34.4208305);
+            setLng(-119.6981901);
+            setFormattedLoc("Santa Monica, CA, USA");
         }
     };
+
+    if ("permissions" in navigator) {
+        navigator.permissions
+            .query({ name: "geolocation" })
+            .then(function (notificationPerm) {
+                notificationPerm.onchange = function () {
+                    if (notificationPerm.state === "granted") {
+                        setBlockedLocation(false);
+                    } else {
+                        setBlockedLocation(true);
+                    }
+                };
+            });
+    }
 
     useEffect(() => {
         currentLocation();
@@ -90,6 +120,7 @@ function App() {
                     setFormattedLoc={setFormattedLoc}
                     currentLocation={currentLocation}
                     loaded={loaded}
+                    blockedLocation={blockedLocation}
                 />
 
                 <Help formattedLoc={formattedLoc} />
