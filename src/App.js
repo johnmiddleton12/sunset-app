@@ -14,10 +14,10 @@ function App() {
     Geocode.setApiKey(process.env.REACT_APP_MAPS_API_KEY);
     // Geocode.setRegion("us");
 
-    // const [lat, setLat] = useState(34.0195);
-    // const [lng, setLng] = useState(118.4912);
-    const [lat, setLat] = useState(0);
-    const [lng, setLng] = useState(0);
+    const [lat, setLat] = useState(34.0195);
+    const [lng, setLng] = useState(118.4912);
+    // const [lat, setLat] = useState(0);
+    // const [lng, setLng] = useState(0);
     const [formattedLoc, setFormattedLoc] = useState("");
     const [loaded, setLoaded] = useState(false);
 

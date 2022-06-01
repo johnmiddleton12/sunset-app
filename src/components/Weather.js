@@ -29,7 +29,6 @@ function Weather({ lat, lng, setLoaded }) {
 
                     Promise.all([response.json(), airResponse.json()]).then(
                         ([data, airData]) => {
-
                             setLoaded(true);
                             // console.log(data);
                             let tempArr = [];
@@ -43,7 +42,7 @@ function Weather({ lat, lng, setLoaded }) {
                                         key={day.dt}
                                         info={day}
                                         airInfo={airDaily[i]}
-                                        today={i===0}
+                                        today={i === 0}
                                     />
                                 );
                             }
@@ -59,8 +58,11 @@ function Weather({ lat, lng, setLoaded }) {
         }
     }, [lat, lng, setLoaded]);
 
-    return <Grid container justifyContent="center" spacing={2} paddingTop="25px">{componentArray}</Grid>
-
+    return (
+        <Grid container justifyContent="center" spacing={2} paddingTop="25px" paddingBottom="40px">
+            {componentArray}
+        </Grid>
+    );
 }
 
 export default Weather;
