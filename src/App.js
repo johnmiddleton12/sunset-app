@@ -1,5 +1,7 @@
 import Search from "./components/Search";
 import Weather from "./components/Weather";
+import Help from './components/Help';
+import Heading from './components/Heading';
 import React, { useState, useEffect } from "react";
 import "./App.css";
 
@@ -16,7 +18,6 @@ function App() {
     const [lng, setLng] = useState(0);
     const [location, setLocation] = useState("");
     const [formattedLoc, setFormattedLoc] = useState("");
-
     const [loaded, setLoaded] = useState(false);
 
     const currentLocation = () => {
@@ -45,14 +46,9 @@ function App() {
 
     return (
         <Container className="App-header">
-            <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                textAlign="center"
-            >
-                <h1>Enter a location</h1>
-            </Box>
+
+            <Heading />
+
             <Search
                 location={location}
                 setLocation={setLocation}
@@ -62,33 +58,8 @@ function App() {
                 currentLocation={currentLocation}
                 loaded={loaded}
             />
-            <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                textAlign="center"
-            >
-                {formattedLoc !== "" && (
-                    <h4>Currently Viewing: {formattedLoc}</h4>
-                )}
-            </Box>
-            <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                textAlign="center"
-            >
-                <p>
-                    AQI is air quality index, 1-5 - 1 is best.
-                    <br />
-                    Clouds is a percentage, 30%-70% is best.
-                    <br />
-                    Humidity is a percentage, lower percentages are best.
-                    <br />
-                    Calm winds are usually best, but wind direction changes near
-                    sunset times are good.
-                </p>
-            </Box>
+
+            <Help formattedLoc={formattedLoc} />
 
             <Weather lat={lat} lng={lng} setLoaded={setLoaded} />
         </Container>
