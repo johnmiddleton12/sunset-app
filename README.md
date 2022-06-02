@@ -6,6 +6,8 @@ This project shows the forecast for the week, predicting how good the sunsets wi
 
 On load, the app tries to use the user's current location, and if that fails defaults to Santa Monica. You can enter in any location to look at the sunset prediction there.
 
+Deployed on Heroku at [sunset-predictor.herokuapp.com](https://sunset-predictor.herokuapp.com/)
+
 ## API Usage
 
 The Google Maps Javascript API was used, specifically the [Geocoding Service](https://developers.google.com/maps/documentation/javascript/geocoding).
